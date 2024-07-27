@@ -1,0 +1,26 @@
+asgiref==3.8.1
+Django==5.0.6
+django-cors-headers==4.3.1
+djangorestframework==3.15.1
+python-dotenv==1.0.1
+###  you should ensure that the version of scikit-learn used to 
+###  train the model is the same as the one used to load the model.
+scikit-learn==1.2.2
+scipy==1.13.1
+threadpoolctl==3.5.0
+sqlparse==0.5.0
+tzdata==2024.1
+numpy==1.26.4
+joblib==1.4.2
+xgboost==2.0.3
+nltk==3.8.1
+torch==2.3.1
+transformers==4.42.3
+google-generativeai==0.7.2
+langchain==0.2.9
+langchain-community==0.2.7
+PyPDF2==3.0.1
+faiss-cpu==1.8.0.post1
+langchain-google-genai==1.0.7
+SpeechRecognition
+pyttsx3
