@@ -24,3 +24,5 @@ faiss-cpu==1.8.0.post1
 langchain-google-genai==1.0.7
 SpeechRecognition
 pyttsx3
+psycopg
+whitenoise
