@@ -61,10 +61,8 @@ pydantic==2.8.2
 pydantic_core==2.20.1
 pyparsing==3.1.2
 PyPDF2==3.0.1
-pypiwin32==223
 python-dotenv==1.0.1
 pyttsx3==2.90
-pywin32==306
 PyYAML==6.0.1
 regex==2024.5.15
 requests==2.32.3
