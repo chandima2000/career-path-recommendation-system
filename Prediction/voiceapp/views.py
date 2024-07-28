@@ -21,8 +21,9 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Load environment variables
-load_dotenv()
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+# load_dotenv()
+API_KEY = os.environ("GOOGLE_API_KEY")
+genai.configure(api_key = API_KEY)
 
 # Initialize TTS Engine
 engine = pyttsx3.init()
