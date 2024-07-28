@@ -22,8 +22,8 @@ from langchain.chains.question_answering import load_qa_chain
 
 
 # Load environment variables
-load_dotenv()
-API_KEY = os.getenv("GOOGLE_API_KEY")
+#load_dotenv()
+API_KEY = os.environ("GOOGLE_API_KEY")
 genai.configure(api_key = API_KEY)
 
 
