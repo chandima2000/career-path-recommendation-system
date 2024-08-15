@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { feedbackState } from "../../features/feedback/feedbackSlice";
+import { TypeAnimation } from "react-type-animation";
 
 const FeedbackForm = () => {
   const [feedback, setFeedback] = useState("");
   const [sentiment, setSentiment] = useState(null);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -13,9 +17,12 @@ const FeedbackForm = () => {
       },
       body: JSON.stringify({ text: feedback }),
     });
+
     const data = await response.json();
-    console.log(data);
+
     setSentiment(data.prediction);
+
+    dispatch(feedbackState(sentiment));
   };
 
   return (
@@ -39,16 +46,38 @@ const FeedbackForm = () => {
       </div>
 
       {sentiment == 1 ? (
-        <p className="mt-4 text-center font-semibold text-2xl">
-          It seems like you are satisfied with the prediction. <br /> If you
-          want more clarifications?<br/> Please get help from our personal Assistants.
-        </p>
-      ) : sentiment == 0 ? (
+        <div>
+          <TypeAnimation
+            sequence={[
+              "It seems like you are satisfied with the prediction.If you want more clarifications? Please get help from our personal Assistants.",
+            ]}
+            speed={50}
+            repeat={0}
+            className="mt-4 text-center font-semibold text-2xl bg-slate-500"
+            style={{
+              height: 'auto',
+              width: '700px',
+              display: 'block',
+              
+            }}
+          />
+        </div>
+      ) : 
+      sentiment == 0 ? (
         <div className="items-center">
-          <p className="mt-4 text-center font-semibold text-2xl">
-            It seems like you are not  satisfied with the prediction. <br/>Plz Get 
-            help from our personal Assistants.
-          </p>
+          <TypeAnimation
+            sequence={[
+              "It seems like you are not satisfied with the prediction.Plz Get help from our personal Assistants.",
+            ]}
+            speed={50}
+            repeat={0}
+            className="mt-4 text-center font-semibold text-2xl bg-slate-500"
+            style={{
+              height: 'auto',
+              width: '700px',
+              display: 'block',
+            }}
+          />
         </div>
       ) : (
         <div></div>

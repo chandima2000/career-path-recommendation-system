@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import FeedbackForm from "../feedbackForm/Feedback";
+import { useSelector } from 'react-redux'
+
 import "regenerator-runtime/runtime";
 
+
 const Predict = () => {
+
   const location = useLocation();
-  const { prediction, probability } = location.state || {};
+  const { prediction } = location.state || {};
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const feedback = useSelector((state) => state.feedbacks)
 
   const roleMapping = {
     0: "Network Security Engineer",
@@ -52,59 +58,69 @@ const Predict = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="predict-bg-img flex flex-col items-center min-h-screen">
-          <h1 className="text-7xl font-semibold  my-16 text-center text-violet-800">
-            Your Future Career Path
-          </h1>
-          {prediction !== undefined ? (
-            <div>
-              <div className="shadow-md rounded-lg p-6 max-w-3xl w-full text-center ">
-                <p className="text-5xl text-white mb-4">
-                  Most Probably You will be a{" "}
-                  <span className="font-semibold">{role}</span>.
-                </p>
-                <p className="text-2xl">Be Strong & Work Hard</p>
-                {/* <p className="text-lg text-gray-700"><span className="font-semibold">Probability:</span> {(probability * 100).toFixed(2)}%</p> */}
+        <div className="relative w-full overflow-hidden">
+          <video
+            className="absolute top-0 left-0 w-full h-full object-cover z-0"
+            autoPlay
+            loop
+            muted
+          >
+            <source src="../../../public/bg.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
+          <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-6">
+            <h1 className="text-7xl my-16 text-center text-white">
+              Your Future Career Path
+            </h1>
+
+            {prediction !== undefined ? (
+              <div>
+                <div className="shadow-md rounded-lg p-6 max-w-3xl w-full text-center bg-opacity-70 bg-white">
+                  <p className="text-4xl text-black mb-4">
+                    Most Probably You will be a{" "}
+                    <span className="font-semibold text-5xl">{role}</span>.
+                  </p>
+                  <p className="text-2xl text-slate-600">Be Strong & Work Hard</p>
+                </div>
+
+                <div className="mt-10">
+                  <p className="text-4xl font-semibold text-center my-10 text-red-600">
+                    What is your thought? Are you satisfied <br /> with the result?
+                    Tell Us.
+                  </p>
+
+                  <FeedbackForm />
+                </div>
               </div>
+            ) : (
+              <p className="text-2xl text-red-500">No prediction available.</p>
+            )}
 
-              <div className="">
-                <p className="text-4xl font-semibold text-center my-10 text-rose-900">
-                  What is your thought? Do you satisfied <br /> with the result?
-                  Tell Us.
-                </p>
-
-                <FeedbackForm />
+            {prediction !== undefined && feedback !== ''  &&(
+              <div className="flex flex-row items-center mt-10">
+                <button
+                  className="py-3 px-8 rounded-xl bg-sky-600 text-white font-bold shadow-md hover:bg-sky-800"
+                  onClick={goToChat}
+                >
+                  Chat Agent
+                </button>
+                <button
+                  className="ml-10 py-3 px-8 rounded-xl bg-green-600 text-white font-bold shadow-md hover:bg-green-800"
+                  onClick={goToVoice}
+                >
+                  Voice Agent
+                </button>
               </div>
-            </div>
-          ) : (
-            <p className="text-2xl text-red-500">No prediction available.</p>
-          )}
-          {prediction && 
-          prediction !== undefined &&
+            )}
 
-          <div className="flex flex-row items-center">
-          <button
-            className="my-10 py-3 px-8 rounded-xl bg-sky-600 w-fit text-white font-bold shadow-md shadow-primary hover:bg-sky-800"
-            onClick={goToChat}
-          >
-            Chat Agent
-          </button>
-          <button
-            className="my-10 ml-10 py-3 px-8 rounded-xl bg-green-600 w-fit text-white font-bold shadow-md shadow-primary hover:bg-green-800"
-            onClick={goToVoice}
-          >
-            Voice Agent
-          </button>
-        </div>
-          }
-          
-
-          <button
-            className="my-10 py-3 px-8 rounded-xl bg-red-600 w-fit text-black font-bold shadow-md shadow-primary hover:bg-red-400"
-            onClick={goToQuiz}
-          >
-            Retake Quiz
-          </button>
+            <button
+              className="mt-10 py-3 px-8 rounded-xl bg-red-600 text-black font-bold shadow-md hover:bg-red-400"
+              onClick={goToQuiz}
+            >
+              Retake Quiz
+            </button>
+          </div>
         </div>
       )}
     </>

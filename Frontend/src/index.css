@@ -128,10 +128,3 @@
   min-height: 100vh;
 }
 
-.predict-bg-img{
-  background-image: url('/robot2.jpeg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh;
-}
