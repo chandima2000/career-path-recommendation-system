@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../../index.css";
 import { TypeAnimation } from "react-type-animation";
 import "regenerator-runtime/runtime";
@@ -23,7 +23,14 @@ const Message = ({ message }) => {
         <div 
           className={`rounded-lg p-4 max-w-xs ${messageClass} ${messageTextClass}`}
         >
-          {message.content}
+          <TypeAnimation
+          sequence={message.content}
+          speed={50}
+          className="text-lg"
+          repeat={0}
+
+          />
+          {/* {message.content} */}
         </div>
       </div>
     </div>
